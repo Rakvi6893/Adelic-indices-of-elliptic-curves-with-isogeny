@@ -1,7 +1,0 @@
-// 15.40.2.a.1
-
-P<x>:=PolynomialRing(Rationals());
-f:=(x^3 + x^2);
-g:=2*x^6 + x^5 - 9*x^4 + 10*x^2 - 3*x - 2;
-E:=HyperellipticCurve(g,f);
-#Chabauty0(Jacobian(SimplifiedModel(E))); // 5 points
