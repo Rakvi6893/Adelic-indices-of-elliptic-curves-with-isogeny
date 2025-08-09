@@ -592,4 +592,89 @@ PJ1 := J! [ pts[3], pts[1] ];
 Order(PJ1); // 0 so point of infinite order
 #Chabauty(PJ1); // 4 points
 ****************************************************************************************************************
+// 120.36.3.c.1 maps to 24.6.1.c.1 which has 2 rational points
+
+// 24.6.1.c.1
+P<x>:=PolynomialRing(Rationals());
+g:=x^3-8;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+// 120.36.3.a.1 maps to 24.6.1.a.1
+
+
+//24.6.1.a.1
+
+
+P<x>:=PolynomialRing(Rationals());
+g:= x^3 + 216;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+// 120.72.3.bee.1
+GL2:=GL(2,Integers(120));
+G:=sub<GL2|[[31, 30, 38, 29], [33, 100, 62, 107], [49, 0, 35, 89],[53,60,82,53],[71,20,91,17]]>;
+
+Grec:=CreateModularCurveRec(120,Generators(G));
+Model:=FindModelOfXG(Grec,67)`psi;
+
+// after computing the model we compute a genus 2 rank 2 quotient and map down to it 
+
+x:=AssociativeArray();
+P2:=ProjectiveSpace(Rationals(),5);
+for i in [1..6] do;
+    x[i]:=P2.i;
+end for;
+C:=Curve(P2,Model);
+bool,C1:=IsHyperelliptic(C);
+C2:=SimplifiedModel(C1);
+
+S:=Automorphisms(C2);
+phi:=S[7];
+G := AutomorphismGroup(C2,[phi]);
+CG,prj := CurveQuotient(G);
+CG; prj; 
+pts1:=Points(CG,1);pts1; 
+pts2:=Points(CG,-1);pts2; // there are 4 points of quotient
+
+// now we lift those points
+
+for p in pts1 do;
+
+Points(p@@prj);
+end for;
+
+for p in pts2 do;
+
+Points(p@@prj);
+end for; // 8 points 
+
+
+//120.72.3.ka.1
+GL2:=GL(2,Integers(120));
+G:=sub<GL2|[[11, 50, 71, 7], [11, 90, 85, 59], [27, 50, 85, 83],[53,50,98,99],[61,60,80,79]]>;
+
+Grec:=CreateModularCurveRec(120,Generators(G));
+Model:=FindModelOfXG(Grec,67)`psi;
+S:=Automorphisms(C2);
+phi:=S[6];
+G := AutomorphismGroup(C2,[phi]);
+CG,prj := CurveQuotient(G);
+CG; prj;
+pts1:=Points(CG,1);pts1; 
+pts2:=Points(CG,-1);pts2; // there are 4 points of quotient
+
+// now we lift those points
+
+for p in pts1 do;
+
+Points(p@@prj);
+end for;
+
+for p in pts2 do;
+
+Points(p@@prj);
+end for; // 12 points 
 
