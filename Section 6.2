@@ -1,1 +1,595 @@
+load "OpenImage-master/main/FindOpenImage.m"; // Please modify it according to the local directory.
+
+//15.36.1.b.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x+1;
+g:=x^3 + x^2 - 5*x + 2;
+E:=EllipticCurve(g,f);
+#TorsionSubgroup(E); //8 points
+***************************************************************************************************************
+//15.24.1.a.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x+1;
+g:=x^3 + x^2 - 10*x - 10;
+E:=EllipticCurve(g,f);
+#TorsionSubgroup(E); //8 points
+****************************************************************************************************************
+//20.24.1.g.1
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + 13*x + 34;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 4 points
+****************************************************************************************************************
+
+//30.12.1.d.1
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 - 327*x + 3454;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); //6 points
+****************************************************************************************************************
+
+//30.36.1.q.1
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + x^2 + 4*x + 4;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 6 points
+****************************************************************************************************************
+
+//30.36.1.r.1
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + 33*x - 74;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+//60.36.1.do.1
+
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[x^2 - y*w, x^2 - 10*x*y - 2*x*w - 25*y^2 + 3*z^2 - w^2];
+PointsViaLifting(Model,2,3); // empty
+
+****************************************************************************************************************
+
+//60.36.1.w.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + 33*x + 74;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+//60.36.1.ga.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 - x^2 + 4*x - 4;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+//60.36.1.dr.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 - 63*x - 162;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); //4 points
+****************************************************************************************************************
+// 60.36.1.dp.1
+
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[x^2 - y*z, x^2 + 10*x*y + 2*x*z - 25*y^2 - z^2 - w^2];
+PointsViaLifting(Model,2,3); // empty
+****************************************************************************************************************
+//60.36.1.x.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + 33*x - 74;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+//60.12.1.j.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 - 327*x - 3454;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+
+****************************************************************************************************************
+//60.36.1.gb.1
+
+
+P<x>:=PolynomialRing(Rationals());
+
+g:=x^3 + 33*x + 74;
+E:=EllipticCurve(g);
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+//120.36.1.ln.1
+
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[2, 119, 25, 116], [60, 97, 49, 3], [63, 34, 92, 105], [69, 52, 85, 51], [107, 30, 24, 73], [117, 40, 34, 33]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+M; // [-x*z + y^2, 25*x^2 - 10*x*y - x*z - 2*y*z + z^2 + 6*w^2]
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[-x*z + y^2, 25*x^2 - 10*x*y - x*z - 2*y*z + z^2 + 6*w^2];
+PointsViaLifting(Model,2,3); // empty
+
+****************************************************************************************************************
+//120.36.1.lq.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[8, 89, 19, 18], [31, 58, 44, 25], [40, 21, 3, 88], [94, 75, 117, 32], [95, 56, 52, 39], [112, 117, 65, 34]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),2);
+for i in [1..3] do;
+    x[i]:=P.i;
+end for;
+
+C:=Curve(P,M);
+E:=EllipticCurve(C);
+Rank(E); // 0
+#TorsionSubgroup(E); // 4 points
+****************************************************************************************************************
+
+//120.36.1.cw.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[25, 34, 106, 3], [69, 68, 46, 81], [83, 90, 24, 19], [103, 98, 86, 35], [105, 116, 14, 17], [118, 119, 89, 8]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),2);
+for i in [1..3] do;
+    x[i]:=P.i;
+end for;
+
+C:=Curve(P,M);
+E:=EllipticCurve(C);
+Rank(E); // 0
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+//120.36.1.lm.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[26, 87, 33, 20], [51, 70, 25, 111], [55, 21, 69, 32], [62, 35, 89, 28], [87, 55, 71, 36], [111, 76, 100, 57]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[x*w + y^2, 25*x^2 - 10*x*y + x*w + 2*y*w - 6*z^2 + w^2];
+PointsViaLifting(Model,2,3); // empty
+****************************************************************************************************************
+//120.36.1.lo.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[26, 75, 117, 44], [33, 61, 112, 27], [41, 88, 23, 71], [52, 65, 1, 76], [68, 55, 91, 97], [92, 15, 81, 116]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[-x^2 - x*z + y^2, 16*x^2 - 12*x*y - 8*x*z + 9*y^2 - 2*y*z + z^2 + 2*w^2];
+PointsViaLifting(Model,2,3); // empty
+****************************************************************************************************************
+
+//120.12.1.bl.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[49, 16, 20, 33], [50, 101, 17, 76], [75, 104, 119, 45], [107, 90, 19, 61], [117, 40, 26, 3]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),2);
+for i in [1..3] do;
+    x[i]:=P.i;
+end for;
+
+C:=Curve(P,M);
+E:=EllipticCurve(C);
+Rank(E); // 0
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+//120.36.1.so.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[29, 0, 12, 7], [61, 102, 102, 101], [65, 29, 44, 115], [93, 20, 16, 117], [96, 17, 115, 108], [97, 119, 19, 52]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),2);
+for i in [1..3] do;
+    x[i]:=P.i;
+end for;
+
+C:=Curve(P,M);
+E:=EllipticCurve(C);
+Rank(E); // 0
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+//120.36.1.sm.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[24, 115, 61, 63], [27, 64, 101, 105], [55, 94, 13, 11], [61, 103, 22, 77], [67, 61, 73, 110], [73, 58, 26, 55]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),2);
+for i in [1..3] do;
+    x[i]:=P.i;
+end for;
+
+C:=Curve(P,M);
+E:=EllipticCurve(C);
+Rank(E); // 0
+#TorsionSubgroup(E); // 2 points
+****************************************************************************************************************
+
+// 120.36.1.lp.1
+level := 120;
+// Elements that, together with Gamma(level), generate the group
+gens := [[27, 62, 53, 111], [40, 23, 11, 2], [41, 41, 43, 104], [53, 61, 104, 95], [70, 29, 49, 55], [101, 105, 87, 14]];
+
+Grec:=CreateModularCurveRec(level,gens);
+M:=FindModelOfXG(Grec,65)`psi;
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
+
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
+
+P<x,y,z,w>:=PolynomialRing(Integers(),4);
+Model:=[-x^2 - x*z + y^2,-16*x^2 + 12*x*y + 8*x*z - 9*y^2 + 2*y*z - z^2 + 2*w^2];
+PointsViaLifting(Model,2,3); // empty
+
+****************************************************************************************************************
+
+
+//30.54.2.a.1
+
+
+P<x>:=PolynomialRing(Rationals());
+f:=x^3+1;
+g:=4*x^3;
+E:=HyperellipticCurve(g,f);
+#Chabauty0(Jacobian(SimplifiedModel(E))); // 4 points
+****************************************************************************************************************
+
+//45.54.2.c.1
+
+
+P<x>:=PolynomialRing(Rationals());
+f:=-(-x^3 - x^2 - x - 1);
+g:=- 2*x^5 - x^3 - 2*x;
+E:=HyperellipticCurve(g,f);
+pts := Points(SimplifiedModel(E) : Bound:=1000); 
+J:=Jacobian(SimplifiedModel(E));
+PJ1 := J! [ pts[3], pts[1] ];
+Order(PJ1); // 0 so point of infinite order
+#Chabauty(PJ1); // 4 points
+****************************************************************************************************************
 
