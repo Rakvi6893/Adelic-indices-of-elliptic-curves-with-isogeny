@@ -66,6 +66,15 @@ p1,p2; end if;
 
 end for; end for; // no output
 
+//computing fixed points of 35.80.5.a.1 under i
+
+P<x,y,z,w,t> := ProjectiveSpace(Rationals(), 4);
+model_0 := [2*x*y-3*x*z-y*z+x*w,x*y-y^2+x*z+y*z+z^2-2*x*w-3*y*w+z*w-w^2,x^2-2*x*y-x*z+y*z+4*z^2-x*w-x*t+2*y*t-2*z*t+3*w*t+t^2,2*t-( x - 2*y + 2*z - 3*w)];
+
+C:=Scheme(P,model_0);
+Dimension(C); // 0
+Points(C); // 2
+
 // 13.91.3.a.1
 
 load "OpenImage-master/main/FindOpenImage.m";  // please change the path according to local directory on your system
