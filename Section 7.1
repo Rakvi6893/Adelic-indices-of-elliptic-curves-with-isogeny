@@ -1,0 +1,243 @@
+P<x>:=PolynomialRing(Rationals());
+
+//6.18.1.a.1
+
+f:= x^3 + 1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//6.36.1.b.1
+
+f:= x^3 - 15*x + 22;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//12.18.1.a.1
+
+f:= x^3 - 1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//12.18.1.b.1
+
+f:= x^3 - 1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//12.18.1.c.1
+
+f:= x^3 + 1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//12.36.1.bo.1
+
+f:=  x^3 - x^2 - 4*x + 4;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //8 points
+
+//12.36.1.bq.1
+
+f:= x^3 + x^2 - 4*x - 4;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //4 points
+
+//12.36.1.bs.1
+
+f:= x^3 -1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//12.36.1.bt.1
+
+f:= x^3 +1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//12.36.1.d.1
+
+f:= x^3 - 15*x - 22;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//12.36.1.k.1
+
+f:= x^3 - 15*x - 22;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//12.36.1.m.1
+
+f:= x^3 - 15*x + 22;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//24.18.1.a.1
+
+f:= x^3 - 8;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.18.1.d.1
+
+f:= x^3 - 8;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.1.br.1
+
+f:= x^3 - 60*x - 176;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.1.fc.1
+
+f:= x^3 - x^2 - 17*x - 15;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //4 points
+
+//24.36.1.fi.1
+
+f:=x^3 + x^2 - 17*x + 15;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //4 points
+
+//24.36.1.fo.1
+
+f:= x^3 - 8;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.1.fp.1
+
+f:= x^3 +1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+
+//24.36.1.fp.1
+
+f:= x^3 +1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //6 points
+Pts:=Points(E:Bound:=100);
+
+//Computing j invariants using j-map
+
+Pol<x,y,z> := PolynomialRing(Rationals(), 3);
+
+map_0_coord_0 := 2^6*((2*y^2-3*z^2)^3*(2*y^2-z^2)^3);
+
+map_0_coord_1 := 1*(z^8*(y-z)^2*(y+z)^2);
+for i in [1..6] do;
+x:=Pts[i][1];
+y:=Pts[i][2];
+z:=Pts[i][3];
+Evaluate(map_0_coord_0,[x,y,z]);
+Evaluate(map_0_coord_1,[x,y,z]); // j-invariant is quotient of these
+print ".....";
+end for;
+
+// j-invariants are 1728 and 16581375 both are CM
+
+
+//24.36.1.fx.1
+
+f:= x^3 -8;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.1.g.1
+
+f:= x^3 - 60*x - 176;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.1.gk.1
+
+f:= x^3 - 1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E); //2 points
+
+//24.36.2.ba.1
+P<x,y,z,w,t>:=ProjectiveSpace(Rationals(),4);
+C:=Curve(P,[-x*w + y^2, 4*z^2 + w^2 - 2*t^2, 4*x*y + z*w, 4*x^2 + y*z]);
+Pts:=PointSearch(C,1000);
+
+map_0_coord_0 := 2^6*((3*w^2+2*t^2)^3);
+
+map_0_coord_1 := 1*(w^2*(w^2-2*t^2)^2);
+for i in [1..4] do;
+x:=Pts[i][1];
+y:=Pts[i][2];
+z:=Pts[i][3];
+w:=Pts[i][4];
+t:=Pts[i][5];
+Evaluate(map_0_coord_0,[x,y,z,w,t]);
+Evaluate(map_0_coord_1,[x,y,z,w,t]); // j-invariant is quotient of these
+print ".....";
+end for;
+
+//only j-invariant is 8000 which is a CM j-invariant
+
+//24.72.2.hp.1
+
+f:=x^3 + 2;
+g:=x^3;
+H:=HyperellipticCurve(f,g);
+H1:=SimplifiedModel(H);
+J:=Jacobian(H1);
+Chabauty0(J); //2 points
+
+//24.72.2.hp.2
+
+
+f:=x^3 + 2;
+g:=x^3;
+H:=HyperellipticCurve(f,g);
+H1:=SimplifiedModel(H);
+J:=Jacobian(H1);
+Chabauty0(J); // 2 points
+
+//24.72.2.jo.1
+P<x,y,z,w,t>:=ProjectiveSpace(Rationals(),4);
+C:=Curve(P,[x^2 - y*z, 2*x*y - z*t, -x*t + 2*y^2, 4*z^2 - 2*w^2 + t^2]);
+Pts:=PointSearch(C,1000);
+
+map_0_coord_0 := -2^6*((2*w^2-3*t^2)^3*(2*w^2+t^2)^3);
+
+map_0_coord_1 := 1*(t^4*(2*w^2-t^2)^4);
+for i in [1..4] do;
+x:=Pts[i][1];
+y:=Pts[i][2];
+z:=Pts[i][3];
+w:=Pts[i][4];
+t:=Pts[i][5];
+Evaluate(map_0_coord_0,[x,y,z,w,t]);
+Evaluate(map_0_coord_1,[x,y,z,w,t]); // j-invariant is quotient of these
+print ".....";
+end for;
+
+//only j-invariant is 1728 which is a CM j-invariant
