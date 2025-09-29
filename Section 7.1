@@ -241,3 +241,68 @@ print ".....";
 end for;
 
 //only j-invariant is 1728 which is a CM j-invariant
+
+//48.72.3.h.1
+
+P<x,y,z>:=ProjectiveSpace(Rationals(),2);
+C:=Curve(P,[x^3*y + y^4 + 4*y^2*z^2 + 2*z^4]);
+PointSearch(C,1000);
+B:=AutomorphismGroup(C);B.1;
+A1 := AutomorphismGroup(C,[B.1]);
+X1, mp1 := CurveQuotient(A1);Genus(X1);
+
+E:=EllipticCurve(X1,X1![0,1,0,0]);
+Rank(E);  // 1
+
+
+Cp:=Curve(Reduction(C,13)); // Z/56 + Z/56 mod 13
+ClassGroup(Cp);
+Cp:=Curve(Reduction(C,17)); // Z/18 + Z/18 + Z/18 mod 17
+ClassGroup(Cp);
+// looking mod 13 and 17 Z/2 x Z/2 is an upper bound
+
+// looking mod 5 we find that there are no divisors of the form Z/2 x Z/2
+
+Cp:=Curve(Reduction(C,5));
+
+Pts:=Points(Cp);
+for p in Pts do;
+for  q in Pts do;
+D:=Divisor(p)-Divisor(q);
+IsPrincipal(2*D);
+IsPrincipal(D);
+print ".......";
+end for;
+end for;
+
+//48.72.3.i.2
+
+
+
+P<x,y,z>:=ProjectiveSpace(Rationals(),2);
+C:=Curve(P,[2*x^4 + 4*x^2*y^2 - 2*x*z^3 + y^4]);
+PointSearch(C,1000);
+B:=AutomorphismGroup(C);B.1;
+A1 := AutomorphismGroup(C,[B.1]);
+X1, mp1 := CurveQuotient(A1);Genus(X1);
+E:=EllipticCurve(X1,mp1(C![0,0,1]));
+Rank(E); //1
+
+Cp:=Curve(Reduction(C,13)); // Z/56 + Z/56 mod 13
+ClassGroup(Cp);
+Cp:=Curve(Reduction(C,17)); // Z/18 + Z/18 + Z/18 mod 17
+ClassGroup(Cp);
+// looking mod 13 and 17 Z/2 x Z/2 is an upper bound
+
+// looking mod 17 we find that there are no divisors of the form Z/2 x Z/2
+
+
+Pts:=Points(Cp);
+for p in Pts do;
+for q in Pts do;
+D:=Divisor(p)-Divisor(q);
+IsPrincipal(2*D);
+IsPrincipal(D);
+print ".......";
+end for;
+end for;
