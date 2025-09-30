@@ -17,6 +17,8 @@ To run this code, it is necessary to install David Zywina's OpenImage repository
 - 13 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 28.
 
 - Section 6.2: Contains computations to verify claims in Section 6.2.
+- Section 7.1: Contains computations to verify claims in Section 7.1.
+
 
 # Version notes and Contact
 
