@@ -1,1 +1,27 @@
+//42.48.2.d.1
+P<x>:=PolynomialRing(Rationals());
 
+g:=13*x^3 - 7;
+f:=x^3+1;
+E:=HyperellipticCurve(g,f);
+#Chabauty0(Jacobian(SimplifiedModel(E))); // 2 points
+
+//126.48.2.a.1
+
+x:=AssociativeArray();
+P:=ProjectiveSpace(Rationals(),3);
+for i in [1..4] do;
+x[i]:=P.i;
+end for;
+C:=Curve(P,[
+x[1]^2*x[3] - 2*x[1]*x[2]*x[3] - x[1]*x[3]^2 + 2*x[2]^2*x[3] + x[2]*x[3]^2 + x[2]*x[3]*x[4],
+x[1]^2*x[2] - 2*x[1]*x[2]^2 - x[1]*x[2]*x[3] + 2*x[2]^3 + x[2]^2*x[3] + x[2]^2*x[4],
+x[1]^3 - x[1]^2*x[2] - x[1]^2*x[3] + x[1]*x[2]*x[4] + 2*x[2]^3 + x[2]^2*x[3] + x[2]^2*x[4],
+x[1]^2*x[4] - 2*x[1]*x[2]*x[4] - x[1]*x[3]*x[4] + 2*x[2]^2*x[4] + x[2]*x[3]*x[4] + x[2]*x[4]^2,
+-4*x[1]^3 + 3*x[1]^2*x[2] + 2*x[1]^2*x[4] + 9*x[1]*x[2]^2 - x[1]*x[2]*x[3] + 5*x[1]*x[3]^2 - 3*x[1]*x[3]*x[4] - 6*x[1]*x[4]^2 + 3*x[2]^3 + 3*x[2]^2*x[3] - x[2]^2*x[4] - 2*x[2]*x[3]^2 - 5*x[2]*x[3]*x[4] - 3*x[2]*x[4]^2 - x[3]^3 - 6*x[3]^2*x[4] - 3*x[3]*x[4]^2 + x[4]^3,
+2*x[1]^3 + 8*x[1]^2*x[2] - 4*x[1]^2*x[3] - 6*x[1]^2*x[4] + 7*x[1]*x[2]*x[3] + 2*x[1]*x[2]*x[4] - 5*x[1]*x[3]^2 - 3*x[1]*x[3]*x[4] + x[1]*x[4]^2 - 3*x[2]^3 + 5*x[2]^2*x[3] + 4*x[2]^2*x[4] + 4*x[2]*x[3]^2 + 2*x[2]*x[3]*x[4] - x[2]*x[4]^2
+]); // Model computed from Zywina's OpenImage repo
+_,C1:=IsHyperelliptic(C);
+J:=Jacobian(SimplifiedModel(C1));
+RankBounds(J);//0
+Chabauty0(J);//empty
