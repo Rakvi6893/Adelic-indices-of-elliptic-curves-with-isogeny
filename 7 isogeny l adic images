@@ -17,15 +17,15 @@ L:=Rationals();
 
 P4<x,y,z,w,t>:=ProjectiveSpace(Rationals(),4);
 C:=Curve(P4,[2*x*y - 3*x*z + x*w - y*z, x*y + x*z - 2*x*w - y^2 + y*z - 3*y*w + z^2 + z*w - w^2, x^2 - 2*x*y - x*z - x*w - x*t + y*z + 2*y*t + 4*z^2 - 2*z*t + 3*w*t + t^2]);
-Cp:=Reduction(C,3);
-Jp:=Jacobian(Cp);  
-ClassGroup(C);
-Cp:=Reduction(C,11);
-Jp:=Jacobian(Cp);  
-ClassGroup(C);
-Cp:=Reduction(C,13);
-Jp:=Jacobian(Cp);  
-ClassGroup(C);
+Cp:=Curve(Reduction(C,3));
+
+ClassGroup(Cp);
+Cp:=Curve(Reduction(C,11));
+
+ClassGroup(Cp);
+Cp:=Curve(Reduction(C,13));
+
+ClassGroup(Cp);
 
 // Z/2 + Z/2 + Z/10 + Z/20 + Z   mod 3
 // Z/10 + Z/18240 + Z         mod 11
