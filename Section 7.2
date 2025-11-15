@@ -6,6 +6,15 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2
 
+//6.24.1.b.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x^3+1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//6 points
+
+
 //12.24.1.b.1
 
 P<x>:=PolynomialRing(Rationals());
@@ -45,6 +54,24 @@ f:= x^3 -27;
 E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2
+
+//18.24.1.b.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x^3+1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//6 points
+
+//18.72.1.e.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x^3-7;
+g:=P!1;
+E:=EllipticCurve(f,g);
+Rank(E); //0
+TorsionSubgroup(E);//3 points
+
 
 //72.24.1.a.1
 
@@ -410,3 +437,61 @@ E:=HyperellipticCurve(g,f);E;
 RankBounds(Jacobian(E)); //0
 Chabauty0(Jacobian(SimplifiedModel(E)));//0
 
+//18.72.2.e.1 and 18.72.2.e.2
+
+P<x>:=PolynomialRing(Rationals());
+f:= - 3*x^5 + 3*x^4 + 9*x^3 - 12*x^2 + 3*x;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));
+
+g:=3*x^5 + 3*x^4 - 9*x^3 - 12*x^2 - 3*x;
+C:=HyperellipticCurve(g);
+Chabauty0(Jacobian(C));
+
+
+// 54.72.3.d.1
+
+P<x,y,z>:=ProjectiveSpace(Rationals(),2);
+C:=Curve(P,[x^3*y + x^3*z + 3*y^3*z + 3*y^2*z^2 + 3*y*z^3]);
+
+
+phi:=iso<C->C|[x,z,y],[x,z,y]>;
+G:=AutomorphismGroup(C,[phi]);
+CG,prj:=CurveQuotient(G);
+Pts:=PointSearch(C,100);
+point:=prj(Pts[1]);
+E:=EllipticCurve(CG,point);
+Rank(E);//1 true
+
+//******************************
+
+
+for p in [5,7,13] do;
+Cp:=Curve(Reduction(C,p));
+ClassGroup(Cp);
+end for; 
+
+// Jacobian is a subgroup of Z/3 x Z/3
+//*********************************
+
+P1:=C![1,0,0];
+P2:=C![0,1,0];
+P3:=C![0,0,1];
+D1:=Divisor(P1)-Divisor(P2);
+IsPrincipal(3*D1);IsPrincipal(D1);
+
+D2:=Divisor(P2)-Divisor(P3);
+
+IsPrincipal(3*D2);IsPrincipal(D2);
+
+[<[a,b], IsLinearlyEquivalent(a*D1,b*D2)> : a,b in [0..2]];
+
+ p := 5; 
+  Cp := Curve(Reduction(C,p)); 
+    i := map<Cp -> Cp | [C.1,C.3,C.2], [C.1,C.3,C.2]>;
+   pts := {@ Cp![0,1,0], Cp![0,0,1], Cp![1,0,0] @};
+    D1 := Divisor(Cp![1,0,0]) - Divisor(Cp![0,1,0]); 
+    D2 := Divisor(Cp![0,1,0]) - Divisor(Cp![0,0,1]); 
+  [<pt, a,b> : pt in pts, a,b in [0..2] | IsLinearlyEquivalent(a*D1 + b*D2, Divisor(pt) - Divisor(i(pt)) )];    
+  
+//[ <(1 : 0 : 0), 0, 0>, <(0 : 1 : 0), 0, 1>, <(0 : 0 : 1), 0, 2> ]
