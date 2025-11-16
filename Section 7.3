@@ -495,3 +495,23 @@ IsPrincipal(3*D2);IsPrincipal(D2);
   [<pt, a,b> : pt in pts, a,b in [0..2] | IsLinearlyEquivalent(a*D1 + b*D2, Divisor(pt) - Divisor(i(pt)) )];    
   
 //[ <(1 : 0 : 0), 0, 0>, <(0 : 1 : 0), 0, 1>, <(0 : 0 : 1), 0, 2> ]
+
+//54.72.4.e.1
+
+Pol<x,y,z,w> := PolynomialRing(Rationals(), 4);
+
+
+// Canonical model
+model_0 := [3*x*y-z*w,3*x^3+3*y^2*z-y*z^2+6*x^2*w+6*x*w^2+3*w^3];
+C:=Curve(ProjectiveSpace(Rationals(),3),model_0);
+Pts:=PointSearch(C,1000);
+
+// j-invariant map from the canonical model
+//   Coordinate number 0:
+map_0_coord_0 := 2^4*3^7*(18226*x^2*z^9*w+36772*x^2*z^6*w^4+10584*x^2*z^3*w^7-6558*x*z^9*w^2+22890*x*z^6*w^5+19980*x*z^3*w^8+59049*y^12+157464*y^9*w^3+52488*y^6*w^6+8748*y^3*w^9+5102*y^2*z^10+59510*y^2*z^7*w^3+14094*y^2*z^4*w^6+26244*y^2*z*w^9-1944*y*z^11-48096*y*z^8*w^3-32112*y*z^5*w^6+36936*y*z^2*w^9+81*z^12+24062*z^9*w^3+70352*z^6*w^6+50220*z^3*w^9);
+//   Coordinate number 1:
+map_0_coord_1 := 1*(x^2*z^9*w-351*x^2*z^6*w^4+14823*x^2*z^3*w^7+45927*x^2*w^10+3*x*z^9*w^2-999*x*z^6*w^5+35721*x*z^3*w^8+45927*x*w^11-y^2*z^10+405*y^2*z^7*w^3-26487*y^2*z^4*w^6-59049*y^2*z*w^9+18*y*z^8*w^3-4860*y*z^5*w^6+74358*y*z^2*w^9+5*z^9*w^3-1539*z^6*w^6+42039*z^3*w^9-59049*w^12);
+for p in Pts do;
+Evaluate(map_0_coord_0,[p[1],p[2],p[3],p[4]]);
+Evaluate(map_0_coord_1,[p[1],p[2],p[3],p[4]]);
+end for;
