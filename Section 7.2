@@ -85,6 +85,13 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//4 points
 
+//12.36.1.bx.1
+
+f:= x^3 + x^2 + x;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
+
 //12.36.1.d.1
 
 f:= x^3 - 15*x - 22;
@@ -232,6 +239,13 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2 points
 
+//24.36.1.gq.1
+
+f:=x^3 + 36*x;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
+
 
 //24.36.2.ba.1
 P<x,y,z,w,t>:=ProjectiveSpace(Rationals(),4);
@@ -301,6 +315,20 @@ print ".....";
 end for;
 
 //only j-invariant is 1728 which is a CM j-invariant
+
+//48.24.1.j.1
+
+f:=x^3 + 24*x - 160;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
+
+//48.24.1.n.2
+
+f:= x^3 - 18*x;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
 
 //48.72.3.h.1
 
