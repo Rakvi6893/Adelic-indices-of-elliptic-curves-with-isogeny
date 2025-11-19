@@ -1,5 +1,53 @@
 P<x>:=PolynomialRing(Rationals());
+function PointsViaLifting(psi,p,m)
+    /* Input:
+            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
+            p  : a prime
+            m  : an integer at least one    
+        Output:
+            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
+    */    
+    r:=Rank(Parent(psi[1]));
+    PolZ<[x]>:=PolynomialRing(Integers(),r);
+    psi:=[PolZ!f: f in psi];
 
+    PP:=ProjectiveSpace(GF(p),r-1);
+    C:=Scheme(PP,psi);
+    S:={Eltseq(P): P in Points(C)};   // points mod p
+    S:={[Integers()!a: a in P]: P in S};
+
+    e:=1;
+    while e lt m do
+        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
+        Snew:={};        
+        for P in S do
+            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
+            A:=[]; b:=[];
+            Pol<[a]>:=PolynomialRing(Integers(),r);
+            for f in psi do
+                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
+                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
+                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
+            end for;
+            A:=ChangeRing(Matrix(A),GF(p));
+            b:=ChangeRing(Vector(b),GF(p));
+            flag,v,W:=IsConsistent(Transpose(A),b);
+            if flag then 
+                T:={Eltseq(v+w): w in W};
+                T:={[Integers()!a: a in w] : w in T};
+                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
+                T:={PP!w: w in T}; 
+                Snew:=Snew join T;
+            end if;
+        end for;
+        S:={Eltseq(P): P in Snew};
+        S:={[Integers()!a: a in P]: P in S};
+        e:=e+1;
+    end while;
+
+    S:={[Integers(p^m)!a: a in P] : P in S};
+    return S;
+end function;
 //6.18.1.a.1
 
 f:= x^3 + 1;
@@ -282,6 +330,45 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//4 points
 
+//24.72.2.hj.1
+
+P<x>:=PolynomialRing(Rationals());
+f:= 3*x^6 + 12*x^3 + 24;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));//no points
+
+//24.72.2.hj.2
+
+
+f:=3*x^6 + 12*x^3 + 24;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));// no points
+
+//24.72.2.hl.1
+
+f:=-x^3-x;
+g:=-(-x^3 - x^2 - x - 1);
+C:=HyperellipticCurve(f,g);C;
+Chabauty0(Jacobian(SimplifiedModel(C)));//4 points
+
+//24.72.2.hl.2
+
+f:=-x^5-x^3;
+g:=-(-x^3 - x^2 - x - 1);
+C:=HyperellipticCurve(f,g);C;
+Chabauty0(Jacobian(SimplifiedModel(C)));//4 points
+
+//24.72.2.hn.1
+
+f:=3*x^6 + 6*x^5 + 9*x^4 + 9*x^2 - 6*x + 3;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));// no points
+
+//24.72.2.hn.2
+
+f:=3*x^6 + 6*x^5 + 9*x^4 + 9*x^2 - 6*x + 3;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C)); // no points
 
 //24.72.2.hp.1
 
@@ -291,6 +378,7 @@ H:=HyperellipticCurve(f,g);
 H1:=SimplifiedModel(H);
 J:=Jacobian(H1);
 Chabauty0(J); //2 points
+
 
 //24.72.2.hp.2
 
@@ -401,3 +489,19 @@ IsPrincipal(D);
 print ".......";
 end for;
 end for;
+
+//48.144.3.bd.2
+Pol<x,y,z,w,t,u>:=PolynomialRing(Rationals(),6);
+psi:=[x^2 - t*u, x^2 + y*z, x*y - z*t, x*u + z^2, x*z - y*u, x*t + y^2, 3*w^2 + 4*t^2 - u^2];
+p:=2;
+m:=5;
+PointsViaLifting(psi,p,m);//empty
+
+//48.144.3.bf.2
+
+Pol<x,y,z,w,t,u>:=PolynomialRing(Rationals(),6);
+psi:=[x*y - z*u, w^2 - w*t + t^2 - u^2, x^2 - w*u + 2*t*u, 2*x^2 - y*z, x*z - y*w + 2*y*t, -2*x*u + y^2, -2*x*w + 4*x*t + z^2];
+p:=2;
+m:=5;
+PointsViaLifting(psi,p,m);//empty
+
