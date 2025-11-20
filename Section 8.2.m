@@ -219,6 +219,31 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E); //2 points
 
+//24.24.1.dq.1
+
+P<x>:=PolynomialRing(Rationals());
+f:=x^3 - 99*x - 378;
+E:=EllipticCurve(f);
+Pts:=PointSearch(E,100);
+
+Pol<x,y,z> := PolynomialRing(Rationals(), 3);
+
+
+
+// Maps from this modular curve, if computed
+
+// j-invariant map from the Weierstrass model
+//   Coordinate number 0:
+map_0_coord_0 := 2^6*3^3*(156*x^2*y^6+11284767*x^2*y^4*z^2+51980096952*x^2*y^2*z^4+43626516244137*x^2*z^6+10542*x*y^6*z+247268592*x*y^4*z^3+744027068241*x*y^2*z^5+501062829774858*x*z^7+y^8+410896*y^6*z^2+3569279040*y^4*z^4+5087920043052*y^2*z^6+1435822394391657*z^8);
+//   Coordinate number 1:
+map_0_coord_1 := 1*(12*x^2*y^6-1377*x^2*y^4*z^2-17496*x^2*y^2*z^4+59049*x^2*z^6-18*x*y^6*z+7776*x*y^4*z^3+111537*x*y^2*z^5-354294*x*z^7+y^8-1296*y^6*z^2+93312*y^4*z^4+1023516*y^2*z^6-3720087*z^8);
+for p in Pts do;
+
+Evaluate(map_0_coord_0,[p[1],p[2],p[3]]);
+Evaluate(map_0_coord_1,[p[1],p[2],p[3]]);
+print ".........";
+end for; //both CM points
+
 //24.36.1.br.1
 
 f:= x^3 - 60*x - 176;
