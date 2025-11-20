@@ -48,6 +48,7 @@ function PointsViaLifting(psi,p,m)
     S:={[Integers(p^m)!a: a in P] : P in S};
     return S;
 end function;
+
 //6.18.1.a.1
 
 f:= x^3 + 1;
@@ -89,6 +90,13 @@ f:=x^3 + 6*x + 7;
 E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2 points
+
+//12.36.2.a.1
+
+
+f:=x^6-1;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));//4 points
 
 //12.36.1.bn.1
 
@@ -168,6 +176,35 @@ E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E); //6 points
 
+//12.36.2.p.1
+
+
+f:=-x^6+1;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C));//4 points
+
+//24.12.1.bz.1
+
+P<x,y,z> := ProjectiveSpace(Rationals(), 2);
+model_0 := [x^3-y^2*z-9*x*z^2];
+C:=Curve(P,model_0);
+Pts:=PointSearch(C,1000);
+Pol<x,y,z> := PolynomialRing(Rationals(), 3);
+
+
+// j-invariant map from the Weierstrass model
+//   Coordinate number 0:
+map_0_coord_0 := 2^6*(2268*x^2*z^2+720*x*y^2*z+64*y^4-729*z^4);
+//   Coordinate number 1:
+map_0_coord_1 := 3^4*(z^2*x^2);
+for P in Pts do;
+
+Evaluate(map_0_coord_0,[P[1],P[2],P[3]]);
+Evaluate(map_0_coord_1,[P[1],P[2],P[3]]);
+print ".........";
+end for;// two cusps and two CM
+
+
 //24.18.1.a.1
 
 f:= x^3 - 8;
@@ -243,6 +280,26 @@ end for;
 
 // j-invariants are 1728 and 16581375 both are CM
 
+//24.36.1.fr.1
+
+f:= x^3 - 27;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
+
+//24.36.1.fu.1
+
+f:=  x^3 + x^2 + 3*x + 3;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
+
+//24.36.1.fv.1
+
+f:= x^3 + x^2 + x;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
 
 //24.36.1.fx.1
 
@@ -410,6 +467,13 @@ print ".....";
 end for;
 
 //only j-invariant is 1728 which is a CM j-invariant
+
+//48.24.1.f.2
+
+f:=  x^3 - 120*x + 448;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2 points
 
 //48.24.1.j.1
 
