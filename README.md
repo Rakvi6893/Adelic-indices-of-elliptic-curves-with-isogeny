@@ -6,19 +6,23 @@ To run this code, it is necessary to install David Zywina's OpenImage repository
 
 # Description of Files
 
-- 2 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 24. 
+- 2 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 17. 
 
-- 3 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 25.
+- 3 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 18.
 
-- 5 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 26.
+- 5 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 19.
 
-- 7 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 27.
+- 7 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 20.
 
-- 13 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 28.
+- 13 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 21.
 
-- Section 6.2: Contains computations to verify claims in Section 6.2.
-- Section 7.1: Contains computations to verify claims in Section 7.1.
-
+- Section 7.2: Contains computations to verify claims of rational point computations in Section 7.2.
+- Section 7.3: Contains computations to verify claims of rational point computations in Section 7.3.
+- Section 7.4: Contains computations to verify claims of rational point computations in Section 7.4.
+- Section 8.2: Contains computations to verify claims of rational point computations in Section 8.2.
+- Section 8.3: Contains computations to verify claims of rational point computations in Section 8.3.
+- Approach_Lattice and Approach_Product contain code to construct collection of subgroups for Section 7 and 8 respectively which we then specialize to files Case p=* for producing curves for each prime as discussed in respective subsections.
+  
 
 # Version notes and Contact
 
@@ -30,4 +34,4 @@ This code was built on MAGMA v2-28.27 and last updated in September 2025. If you
 
 [Jacob Mayle](https://www.jacobmayle.com/), University of Delaware, mayle (at) udel (dot) edu
 
-[Rakvi](https://raakvi.wixsite.com/rakvi), University of Maine, raakvi (at) gmail (dot) com
+[Rakvi](https://raakvi.wixsite.com/rakvi), The University of Maine, raakvi (at) gmail (dot) com
