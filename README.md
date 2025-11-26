@@ -6,16 +6,17 @@ To run this code, it is necessary to install David Zywina's OpenImage repository
 
 # Description of Files
 
-- 2 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 17. 
+- 2 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 19. 
 
-- 3 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 18.
+- 3 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 20.
 
-- 5 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 19.
+- 5 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 21.
 
-- 7 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 20.
+- 7 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 22.
 
-- 13 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 21.
+- 13 isogeny l adic images: Contains computations to verify claims in the proof of Proposition 23.
 
+- Section 4.1: Contains computations to verify claims of rational point computations in Section 4.1.
 - Section 7.2: Contains computations to verify claims of rational point computations in Section 7.2.
 - Section 7.3: Contains computations to verify claims of rational point computations in Section 7.3.
 - Section 7.4: Contains computations to verify claims of rational point computations in Section 7.4.
