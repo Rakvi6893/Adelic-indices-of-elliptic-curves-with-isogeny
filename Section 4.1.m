@@ -11,11 +11,11 @@ E:=EllipticCurveFromjInvariant(j);
 pi:=hom<GL(2,Integers(864370))->GL(2,Integers(2))|[GL(2,Integers(2))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
 Order(GL(2,Integers(2)))/Order(pi(G)); // 1
 
-
-G; // 3 and 7 do not divide the level of G
-
-
 pi:=hom<GL(2,Integers(864370))->GL(2,Integers(5))|[GL(2,Integers(5))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
 Order(GL(2,Integers(5)))/Order(pi(G)); // 1
 
+pi:=hom<GL(2,Integers(864370))->GL(2,Integers(61))|[GL(2,Integers(61))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
+Order(GL(2,Integers(61)))/Order(pi(G)); // 1
 
+pi:=hom<GL(2,Integers(864370))->GL(2,Integers(109))|[GL(2,Integers(109))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
+Order(GL(2,Integers(109)))/Order(pi(G)); // 1
