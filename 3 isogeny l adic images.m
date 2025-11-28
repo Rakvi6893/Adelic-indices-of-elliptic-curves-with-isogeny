@@ -11,6 +11,18 @@ E:=HyperellipticCurve(g,f);
 #Chabauty0(Jacobian(SimplifiedModel(E))); // 5 points
 // one can verify on the curve's LMFDB page that these are all non CM.
 
+
+//15.20.1.a.1
+
+
+
+f:=x^3 + x^2 + 2*x + 4;
+g:=P!1;
+E:=EllipticCurve(f,g);
+Rank(E);//0
+#TorsionSubgroup(E);//5
+
+
 //Considering 7-adic images
 // Solved via https://github.com/rouseja/ModCrvToEC/tree/main
 
