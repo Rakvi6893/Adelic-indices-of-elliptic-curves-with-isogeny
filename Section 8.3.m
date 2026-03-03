@@ -1,38 +1,24 @@
-// 6.24.1.a.1
+P<x>:=PolynomialRing(Rationals());
 
+// 8.3.1: Maximal products with finitely many points
+// The following are elliptic curves of rank 0
+// Their only rational points are either cusps or CM points.
+
+// 6.24.1.a.1
 P<x>:=PolynomialRing(Rationals());
 f:=x^3-27;
 E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2
 
-//6.24.1.b.1
-
-P<x>:=PolynomialRing(Rationals());
-f:=x^3+1;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//6 points
-
-
 //12.24.1.b.1
-
 P<x>:=PolynomialRing(Rationals());
 f:=x^3+27;
 E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2
 
-//12.32.1.b.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3 + x^2 - 24*x + 36;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//8
-
 //12.72.1.d.1
-
 P<x>:=PolynomialRing(Rationals());
 f:= x^3 -1;
 E:=EllipticCurve(f);
@@ -40,7 +26,6 @@ Rank(E); //0
 TorsionSubgroup(E);//2
 
 //12.72.1.f.1
-
 P<x>:=PolynomialRing(Rationals());
 f:= x^3 +1;
 E:=EllipticCurve(f);
@@ -48,33 +33,48 @@ Rank(E); //0
 TorsionSubgroup(E);//6
 
 //18.24.1.a.1
-
 P<x>:=PolynomialRing(Rationals());
 f:= x^3 -27;
 E:=EllipticCurve(f);
 Rank(E); //0
 TorsionSubgroup(E);//2
 
-//18.24.1.b.1
-
+//24.24.1.bx.1
 P<x>:=PolynomialRing(Rationals());
-f:=x^3+1;
+f:= x^3 +216;
 E:=EllipticCurve(f);
 Rank(E); //0
-TorsionSubgroup(E);//6 points
+TorsionSubgroup(E);//2
 
-//18.72.1.e.1
-
+//24.72.1.t.1
 P<x>:=PolynomialRing(Rationals());
-f:=x^3-7;
-g:=P!1;
-E:=EllipticCurve(f,g);
+f:= x^3 -8;
+E:=EllipticCurve(f);
 Rank(E); //0
-TorsionSubgroup(E);//3 points
+TorsionSubgroup(E);//2
 
+//36.24.1.a.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^3 +27;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2
+
+//36.72.1.b.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^3 -1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//2
+
+//36.72.1.c.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^3 +1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//6
 
 //72.24.1.a.1
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),2);
 for i in [1..3] do;
@@ -89,7 +89,6 @@ Rank(E);//0
 TorsionSubgroup(E);//2
 
 //72.72.1.d.1
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),2);
 for i in [1..3] do;
@@ -103,48 +102,124 @@ E:=EllipticCurve(C,Pts[1]);
 Rank(E);//0
 TorsionSubgroup(E);//2
 
-//24.24.1.bx.1
-
+// The elliptic curve 12.32.1.b.1 is of rank $0$ and has eight rational points. 
+// It has non-CM j-invariants discussed in the paper.
+//12.32.1.b.1
 P<x>:=PolynomialRing(Rationals());
-f:= x^3 +216;
+f:= x^3 + x^2 - 24*x + 36;
 E:=EllipticCurve(f);
 Rank(E); //0
-TorsionSubgroup(E);//2
+TorsionSubgroup(E);//8
 
-//24.72.1.t.1
+// The following genus 2 curves are all rank 0.
+// Using Chabauty0, we compute all the rational points. 
+// All of their rational points, if any exist, are either cusps or CM points. 
 
-P<x>:=PolynomialRing(Rationals());
-f:= x^3 -8;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//2
-
-//36.24.1.a.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3 +27;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//2
-
-//36.72.1.b.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3 -1;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//2
-
-//36.72.1.c.1
-
+//18.36.2.d.1
 P<x>:=PolynomialRing(Rationals());
 f:= x^3 +1;
-E:=EllipticCurve(f);
-Rank(E); //0
-TorsionSubgroup(E);//6
+g:=-9*x^3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//6
+
+//18.72.2.b.1
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:=x^5 - x^4 - 3*x^3 + 4*x^2 - x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//3
+
+//18.72.2.b.2
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:= - x^5 - x^4 + 3*x^3 + 4*x^2 + x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//3
+
+//18.72.2.d.1
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:= 3*x^6 - 9*x^5 - 9*x^4 + 33*x^3 - 9*x^2 - 9*x + 3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//0
+
+//18.108.2.a.1
+P<x>:=PolynomialRing(Rationals());
+f:= -(-x^3 - x - 1);
+g:= - x^5 + 2*x^4 - 3*x^3 + x^2 - x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//6
+
+//18.108.2.b.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^3+1;
+g:=2*x^3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//4
+
+//18.108.2.c.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^2+x;
+g:=3*x^6 - 9*x^5 + 11*x^4 - 8*x^3 + 11*x^2 - 9*x + 3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//0
+
+//18.108.2.d.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^3+x+1;
+g:=x^5 + 2*x^4 + 2*x^3 + x^2;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//6
+
+//18.108.2.d.2
+P<x>:=PolynomialRing(Rationals());
+f:= x^3+x+1;
+g:=- x^5 + 2*x^4 - 3*x^3 + x^2 - x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//6
+
+//18.108.2.e.1
+P<x>:=PolynomialRing(Rationals());
+f:= x^2+x;
+g:=3*x^6 - 9*x^5 + 11*x^4 - 8*x^3 + 11*x^2 - 9*x + 3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//0
+
+//36.72.2.a.1
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:=- x^5 + x^4 + 3*x^3 - 4*x^2 + x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//3
+
+//36.72.2.a.2
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:=x^5 + x^4 - 3*x^3 - 4*x^2 - x;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//3
+
+//36.72.2.b.1
+P<x>:=PolynomialRing(Rationals());
+f:= 0;
+g:=- 3*x^6 + 9*x^5 + 9*x^4 - 33*x^3 + 9*x^2 + 9*x - 3;
+E:=HyperellipticCurve(g,f);E;
+RankBounds(Jacobian(E)); //0
+Chabauty0(Jacobian(SimplifiedModel(E)));//0
 
 //54.108.2.a.1
-
 P<x>:=PolynomialRing(Rationals());
 f:= x^3 +1;
 g:=-3*x^3;
@@ -153,7 +228,6 @@ RankBounds(Jacobian(E)); //0
 Chabauty0(Jacobian(SimplifiedModel(E)));//4
 
 //72.72.2.a.1
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),3);
 for i in [1..4] do;
@@ -172,62 +246,7 @@ J:=Jacobian(SimplifiedModel(C1));
 RankBounds(J);//0
 Chabauty0(J);//3
 
-//18.36.2.d.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3 +1;
-g:=-9*x^3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//6
-
-//18.72.2.b.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:=x^5 - x^4 - 3*x^3 + 4*x^2 - x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//3
-
-//18.72.2.b.2
-
-P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:= - x^5 - x^4 + 3*x^3 + 4*x^2 + x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//3
-
-//18.72.2.d.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:= 3*x^6 - 9*x^5 - 9*x^4 + 33*x^3 - 9*x^2 - 9*x + 3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//0
-
-//18.108.2.a.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= -(-x^3 - x - 1);
-g:= - x^5 + 2*x^4 - 3*x^3 + x^2 - x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//6
-
-//18.108.2.b.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3+1;
-g:=2*x^3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//4
-
 //72.72.2.a.2
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),3);
 for i in [1..4] do;
@@ -247,7 +266,6 @@ RankBounds(J);//0
 Chabauty0(J);//3
 
 //72.72.2.b.1
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),3);
 for i in [1..4] do;
@@ -267,7 +285,6 @@ RankBounds(J);//0
 Chabauty0(J);//3
 
 //72.72.2.b.2
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),3);
 for i in [1..4] do;
@@ -287,7 +304,6 @@ RankBounds(J);//0
 Chabauty0(J);//3
 
 //72.72.2.c.1
-
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),3);
 for i in [1..4] do;
@@ -306,44 +322,8 @@ J:=Jacobian(SimplifiedModel(C1));
 RankBounds(J);//0
 Chabauty0(J);//0
 
-//18.108.2.c.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^2+x;
-g:=3*x^6 - 9*x^5 + 11*x^4 - 8*x^3 + 11*x^2 - 9*x + 3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//0
-
-//18.108.2.d.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3+x+1;
-g:=x^5 + 2*x^4 + 2*x^3 + x^2;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//6
-
-//18.108.2.d.2
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^3+x+1;
-g:=- x^5 + 2*x^4 - 3*x^3 + x^2 - x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//6
-
-//18.108.2.e.1
-
-P<x>:=PolynomialRing(Rationals());
-f:= x^2+x;
-g:=3*x^6 - 9*x^5 + 11*x^4 - 8*x^3 + 11*x^2 - 9*x + 3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//0
-
+// analysis for 72.72.2.d.1
 //72.72.2.d.1
-
 function PointsViaLifting(psi,p,m)
     /* Input:
             psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
@@ -410,50 +390,34 @@ C;
 ]*/
 PointsViaLifting(C,2,2);//empty
 
-//36.72.2.a.1
-
+// 8.3.2: Products with infinitely many rational points
+//6.24.1.b.1
 P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:=- x^5 + x^4 + 3*x^3 - 4*x^2 + x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//3
+f:=x^3+1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//6 points
+// the curves 18.72.3.j.1, 18.72.3.n.1 and 18.72.3.m.1 cover 6.24.1.b.1 all cover 6.24.1.b.1 as well.
 
-//36.72.2.a.2
-
+//18.24.1.b.1
 P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:=x^5 + x^4 - 3*x^3 - 4*x^2 - x;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//3
+f:=x^3+1;
+E:=EllipticCurve(f);
+Rank(E); //0
+TorsionSubgroup(E);//6 points
+// the curves 18.72.3.k.1, 18.72.3.k.2, 18.72.3.o.1 and 54.72.3.c.1 cover 18.24.1.b.1 as well.
 
-//36.72.2.b.1
-
+//18.72.1.e.1
 P<x>:=PolynomialRing(Rationals());
-f:= 0;
-g:=- 3*x^6 + 9*x^5 + 9*x^4 - 33*x^3 + 9*x^2 + 9*x - 3;
-E:=HyperellipticCurve(g,f);E;
-RankBounds(Jacobian(E)); //0
-Chabauty0(Jacobian(SimplifiedModel(E)));//0
-
-//18.72.2.e.1 and 18.72.2.e.2
-
-P<x>:=PolynomialRing(Rationals());
-f:= - 3*x^5 + 3*x^4 + 9*x^3 - 12*x^2 + 3*x;
-C:=HyperellipticCurve(f);
-Chabauty0(Jacobian(C));
-
-g:=3*x^5 + 3*x^4 - 9*x^3 - 12*x^2 - 3*x;
-C:=HyperellipticCurve(g);
-Chabauty0(Jacobian(C));
-
+f:=x^3-7;
+g:=P!1;
+E:=EllipticCurve(f,g);
+Rank(E); //0
+TorsionSubgroup(E);//3 points
 
 // 54.72.3.d.1
-
 P<x,y,z>:=ProjectiveSpace(Rationals(),2);
 C:=Curve(P,[x^3*y + x^3*z + 3*y^3*z + 3*y^2*z^2 + 3*y*z^3]);
-
 
 phi:=iso<C->C|[x,z,y],[x,z,y]>;
 G:=AutomorphismGroup(C,[phi]);
@@ -464,7 +428,6 @@ E:=EllipticCurve(CG,point);
 Rank(E);//1 true
 
 //******************************
-
 
 for p in [5,7,13] do;
 Cp:=Curve(Reduction(C,p));
@@ -496,10 +459,17 @@ IsPrincipal(3*D2);IsPrincipal(D2);
   
 //[ <(1 : 0 : 0), 0, 0>, <(0 : 1 : 0), 0, 1>, <(0 : 0 : 1), 0, 2> ]
 
+//18.72.2.e.1 and 18.72.2.e.2
+P<x>:=PolynomialRing(Rationals());
+f:= - 3*x^5 + 3*x^4 + 9*x^3 - 12*x^2 + 3*x;
+C:=HyperellipticCurve(f);
+Chabauty0(Jacobian(C)); //3, all cusps.
+g:=3*x^5 + 3*x^4 - 9*x^3 - 12*x^2 - 3*x;
+C:=HyperellipticCurve(g);
+Chabauty0(Jacobian(C)); //3, all cusps.
+
 //54.72.4.e.1
-
 Pol<x,y,z,w> := PolynomialRing(Rationals(), 4);
-
 
 // Canonical model
 model_0 := [3*x*y-z*w,3*x^3+3*y^2*z-y*z^2+6*x^2*w+6*x*w^2+3*w^3];

@@ -62,7 +62,5 @@ PointsViaLifting(Model,7,2); // empty
 // Considering 11-adic images and p-adic images for 19<= p < 37
 // Solved via Proposition 22
 
-
-
 //Considering 17-adic and 37-adic images
 //Nothing to show.
