@@ -224,7 +224,7 @@ PossilbyBadIdx := function(DeltaE, GoodIdx)
     return PosBadIdx;
 end function;
 
-// (From previous paper) //
+// (From previous paper, Serre Curves Relative to Obstructions Modulo 2 by Mayle and Rakvi) //
 /////////////////////////////////////////////////
 // Given a positive integer n, output GL(2,Z/nZ).
 /////////////////////////////////////////////////
