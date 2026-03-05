@@ -1,5 +1,3 @@
-
-// This function still needs some work
 IdentifyCurves := function(L)
     Lbls := [];
     for i in [1..#L] do
@@ -57,8 +55,6 @@ IdentifyCurvesGps := function(L)
     return Lbls;
 end function;
 
-
-// This function still needs some work
 IdentifyCurvesX := function(L, K)
     Lnew := [];
     for i in [1..#L] do
