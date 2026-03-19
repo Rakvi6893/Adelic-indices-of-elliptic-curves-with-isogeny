@@ -9,7 +9,7 @@ f:=(x^3 + x^2);
 g:=2*x^6 + x^5 - 9*x^4 + 10*x^2 - 3*x - 2;
 E:=HyperellipticCurve(g,f);
 #Chabauty0(Jacobian(SimplifiedModel(E))); // 5 points
-// one can verify on the curve's LMFDB page that these are all non CM.
+// one can verify on the curve's LMFDB page that these are all CM.
 
 
 //15.20.1.a.1

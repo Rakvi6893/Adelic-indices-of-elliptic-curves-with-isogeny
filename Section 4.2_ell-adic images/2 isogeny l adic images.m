@@ -10,7 +10,7 @@ g:=x^3 + x^2 - 3*x + 1;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); // 5 points 
 Rank(E); // 0 true
-// one can verify on the curve's LMFDB page that these are all non CM.
+// one can verify on the curve's LMFDB page that these are all CM.
 
 // 10.15.1.a.1
 P<x>:=PolynomialRing(Rationals());
@@ -19,7 +19,7 @@ g:=x^3 + x^2 + 22*x - 9;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); // 5 points
 Rank(E); // 0 true
-// one can verify on the curve's LMFDB page that these are all non CM.
+// one can verify on the curve's LMFDB page that these are all CM.
 
 // Considering 7-adic images
 // 14.84.3.a.1
@@ -32,7 +32,7 @@ g:=- 2*x^5 + 4*x^4 - 3*x^2 + x + 1;
 E:=HyperellipticCurve(g,f);
 
 #Chabauty0(Jacobian(SimplifiedModel(E))); // 4 points
-// one can verify on the curve's LMFDB page that these are all non CM.
+// one can verify on the curve's LMFDB page that these are all CM.
 
 // Considering 11-adic images and p-adic images for 19<= p < 37
 // Solved via Proposition 22

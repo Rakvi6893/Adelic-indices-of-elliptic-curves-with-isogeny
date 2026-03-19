@@ -10,7 +10,7 @@ g:=- x^5 - x^4 - 2*x^3 - 4*x^2 - 2*x - 1;
 E:=HyperellipticCurve(g,f);
 
 #Chabauty0(Jacobian(SimplifiedModel(E))); // 2
-// one can verify on the curve's LMFDB page that these are all non CM.
+// one can verify on the curve's LMFDB page that these are all CM.
 
 // 35.80.5.a.1
 L:=Rationals();
