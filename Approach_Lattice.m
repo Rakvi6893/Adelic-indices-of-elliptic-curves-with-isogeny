@@ -33,7 +33,7 @@ IsConjEll := function(A, L, ell)
     return false;
 end function;
 
-// Given a record X of [insert remark on format of input], the function
+// Given a modular curve record X, the function
 // attempts to recognize X as an elliptic curve and returns its rank, if possible. 
 // In the event of an error, we check for a local obstruction.
 // In this case, the function returns -1 if a local obstruction is found and 1 otherwise.
@@ -61,8 +61,7 @@ GenusOneRank := function(X)
     return Rk;
 end function;
 
-// Recursive function for constructing a lattice of subgroups
-// H of H0 (in GL(2,Z_6)) for which H0 x K ...
+// Recursive function for constructing a lattice of subgroups as described in the article
 // Note: H0 is not included in the output!
 function ConstructLattice(H0, K, L2, L3 : IncludeRoot := true)
     LevelOfH0 := GL2Level(H0);
@@ -131,8 +130,7 @@ end function;
 
 // Given a lattice L, returns sublattices Linf and Lfin such that the modular curves of
 // H x K have infinitely or finitely many rational points, respectively.
-// NeedToCheck does [to do: fill in]
-// We modify the original input L, which is returned as [to do: fill in]
+// We modify the original input L. 
 MakeSubLats := function(L)
     lvl := LCM({*GL2Level(H[1]) : H in L*});
     L := [<GL2Lift(H[1],lvl),H[2],H[3]> : H in L];
