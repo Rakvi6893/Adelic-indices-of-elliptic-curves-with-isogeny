@@ -9,6 +9,7 @@ f:=x+1;
 g:=x^3 + x^2 - 3*x + 1;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); // 5 points 
+Rank(E); // 0 true
 // one can verify on the curve's LMFDB page that these are all non CM.
 
 // 10.15.1.a.1
@@ -17,6 +18,7 @@ f:=x+1;
 g:=x^3 + x^2 + 22*x - 9;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); // 5 points
+Rank(E); // 0 true
 // one can verify on the curve's LMFDB page that these are all non CM.
 
 // Considering 7-adic images
