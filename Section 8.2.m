@@ -184,6 +184,7 @@ end for;
 //only j-invariant is 1728 which is a CM j-invariant
 
 //24.72.2.hp.1
+P<x>:=PolynomialRing(Rationals());
 f:=x^3 + 2;
 g:=x^3;
 H:=HyperellipticCurve(f,g);
@@ -268,6 +269,7 @@ end for;
 
 // Many of the necessary curves to consider cover a rank 0 elliptic curve with no non-CM rational points.
 // 48.144.9.bep.1 covers 12.18.1.g.1
+P<x>:=PolynomialRing(Rationals());
 f:=x^3 + 6*x + 7;
 E:=EllipticCurve(f);
 Rank(E); //0
@@ -438,6 +440,7 @@ PointsViaLifting(psi,p,m);//empty
 // The curves 48.288.13.bgi.1, 48.288.13.bgl.1 and 48.288.21.hxf.1 have no real points. 
 //The curve 48.288.13.bfd.1 covers 24.36.1.fr.1, which has rank 0, and has exactly two rational points. One is a cusp and one is CM. 
 //24.36.1.fr.1
+P<x>:=PolynomialRing(Rationals());
 f:= x^3 - 27;
 E:=EllipticCurve(f);
 Rank(E); //0
@@ -494,6 +497,7 @@ end for;// two cusps and two CM
 
 //The curve 48.144.7.mg.1 covers 48.24.1.f.2 which is an elliptic curve of rank 0. It has exactly two points: one is a cusp and one is CM.
 //48.24.1.f.2
+P<x>:=PolynomialRing(Rationals());
 f:=  x^3 - 120*x + 448;
 E:=EllipticCurve(f);
 Rank(E); //0
@@ -506,8 +510,9 @@ TorsionSubgroup(E);//2 points
 
 
 
-******************
+// ******************
 //12.36.2.a.1
+P<x>:=PolynomialRing(Rationals());
 f:=x^6-1;
 C:=HyperellipticCurve(f);
 Chabauty0(Jacobian(C));//4 points
@@ -519,7 +524,7 @@ Chabauty0(Jacobian(C));//4 points
 
 
 
-********************
+// ********************
 
 
 //48.72.3.a.2
@@ -674,9 +679,10 @@ print ".........";
 end for; //both CM points
 
 
-******************
+// ******************
 
 //6.36.1.b.1 
+P<x>:=PolynomialRing(Rationals());
 f:= x^3 - 15*x + 22;
 E:=EllipticCurve(f);
 Rank(E); //0
