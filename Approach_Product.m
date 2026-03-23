@@ -10,7 +10,7 @@ load "Approach_Lattice.m";
 ChangeDirectory("/Users/Jacob/");
 load "RelevantModCrvs.m";
 load "Identifier.m";
-load "GL2GroupTheory.m"; //this is in Zywina's repo
+// load "GL2GroupTheory.m"; //this is in Zywina's repo
 
 // The next few functions help us understand the subgroup tree of X0(p)
 
@@ -90,7 +90,7 @@ end function;
 // Returns false if X_G has finitely many rational points; returns true
 // if X_G has infinitely many rational or unable to determine (this is safe).
 HasInfManyPts := function(G)
-    X := CreateModularCurveRec(G);
+    X := CreateModularCurveRec(#BaseRing(G), [ Eltseq(Transpose(g)) : g in Generators(G)]);
     GenusOfX := X`genus;
     print "Genus:", GenusOfX;
     if GenusOfX ge 2 then
