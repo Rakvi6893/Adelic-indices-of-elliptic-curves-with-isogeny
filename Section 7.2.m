@@ -8,7 +8,7 @@ f:=x+1;
 g:=x^3 + x^2 - 5*x + 2;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); //8 points
-***************************************************************************************************************
+// ***************************************************
 //15.24.1.a.1
 
 P<x>:=PolynomialRing(Rationals());
@@ -16,7 +16,7 @@ f:=x+1;
 g:=x^3 + x^2 - 10*x - 10;
 E:=EllipticCurve(g,f);
 #TorsionSubgroup(E); //8 points
-****************************************************************************************************************
+// ***************************************************
 //20.24.1.g.1
 
 P<x>:=PolynomialRing(Rationals());
@@ -24,7 +24,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + 13*x + 34;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 4 points
-****************************************************************************************************************
+// ***************************************************
 
 //30.12.1.d.1
 
@@ -33,7 +33,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 - 327*x + 3454;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); //6 points
-****************************************************************************************************************
+// ***************************************************
 
 //30.36.1.q.1
 
@@ -42,7 +42,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + x^2 + 4*x + 4;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 6 points
-****************************************************************************************************************
+// ***************************************************
 
 //30.36.1.r.1
 
@@ -51,7 +51,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + 33*x - 74;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 //60.36.1.do.1
 
@@ -59,7 +59,7 @@ P<x,y,z,w>:=PolynomialRing(Integers(),4);
 Model:=[x^2 - y*w, x^2 - 10*x*y - 2*x*w - 25*y^2 + 3*z^2 - w^2];
 PointsViaLifting(Model,2,3); // empty
 
-****************************************************************************************************************
+// ***************************************************
 
 //60.36.1.w.1
 
@@ -69,7 +69,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + 33*x + 74;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 //60.36.1.ga.1
 
@@ -79,7 +79,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 - x^2 + 4*x - 4;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 //60.36.1.dr.1
 
 
@@ -88,13 +88,13 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 - 63*x - 162;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); //4 points
-****************************************************************************************************************
+// ***************************************************
 // 60.36.1.dp.1
 
 P<x,y,z,w>:=PolynomialRing(Integers(),4);
 Model:=[x^2 - y*z, x^2 + 10*x*y + 2*x*z - 25*y^2 - z^2 - w^2];
 PointsViaLifting(Model,2,3); // empty
-****************************************************************************************************************
+// ***************************************************
 //60.36.1.x.1
 
 
@@ -103,7 +103,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + 33*x - 74;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 //60.12.1.j.1
 
@@ -114,7 +114,7 @@ g:=x^3 - 327*x - 3454;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
 
-****************************************************************************************************************
+// ***************************************************
 //60.36.1.gb.1
 
 
@@ -123,26 +123,29 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3 + 33*x + 74;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 //120.36.1.ln.1
 
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[2, 119, 25, 116], [60, 97, 49, 3], [63, 34, 92, 105], [69, 52, 85, 51], [107, 30, 24, 73], [117, 40, 34, 33]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
-M; // [-x*z + y^2, 25*x^2 - 10*x*y - x*z - 2*y*z + z^2 + 6*w^2]
+M;
+/* [
+    -x[1]*x[3] + x[2]^2,
+    25*x[1]^2 + 10*x[1]*x[2] - x[1]*x[3] + 2*x[2]*x[3] + x[3]^2 + 6*x[4]^2
+] */
+PointsViaLifting(M,2,3); // empty
 
-P<x,y,z,w>:=PolynomialRing(Integers(),4);
-Model:=[-x*z + y^2, 25*x^2 - 10*x*y - x*z - 2*y*z + z^2 + 6*w^2];
-PointsViaLifting(Model,2,3); // empty
-
-****************************************************************************************************************
+// ***************************************************
 //120.36.1.lq.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[8, 89, 19, 18], [31, 58, 44, 25], [40, 21, 3, 88], [94, 75, 117, 32], [95, 56, 52, 39], [112, 117, 65, 34]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
@@ -156,12 +159,13 @@ C:=Curve(P,M);
 E:=EllipticCurve(C);
 Rank(E); // 0
 #TorsionSubgroup(E); // 4 points
-****************************************************************************************************************
+// ***************************************************
 
 //120.36.1.cw.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[25, 34, 106, 3], [69, 68, 46, 81], [83, 90, 24, 19], [103, 98, 86, 35], [105, 116, 14, 17], [118, 119, 89, 8]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
@@ -175,37 +179,37 @@ C:=Curve(P,M);
 E:=EllipticCurve(C);
 Rank(E); // 0
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 //120.36.1.lm.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[26, 87, 33, 20], [51, 70, 25, 111], [55, 21, 69, 32], [62, 35, 89, 28], [87, 55, 71, 36], [111, 76, 100, 57]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
 
-P<x,y,z,w>:=PolynomialRing(Integers(),4);
-Model:=[x*w + y^2, 25*x^2 - 10*x*y + x*w + 2*y*w - 6*z^2 + w^2];
-PointsViaLifting(Model,2,3); // empty
-****************************************************************************************************************
+PointsViaLifting(M,2,3); // empty
+// ***************************************************
+
 //120.36.1.lo.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[26, 75, 117, 44], [33, 61, 112, 27], [41, 88, 23, 71], [52, 65, 1, 76], [68, 55, 91, 97], [92, 15, 81, 116]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
 
-P<x,y,z,w>:=PolynomialRing(Integers(),4);
-Model:=[-x^2 - x*z + y^2, 16*x^2 - 12*x*y - 8*x*z + 9*y^2 - 2*y*z + z^2 + 2*w^2];
-PointsViaLifting(Model,2,3); // empty
-****************************************************************************************************************
+PointsViaLifting(M,2,3); // empty
+// ***************************************************
 
 //120.12.1.bl.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[49, 16, 20, 33], [50, 101, 17, 76], [75, 104, 119, 45], [107, 90, 19, 61], [117, 40, 26, 3]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
@@ -219,15 +223,16 @@ C:=Curve(P,M);
 E:=EllipticCurve(C);
 Rank(E); // 0
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 //120.36.1.so.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[29, 0, 12, 7], [61, 102, 102, 101], [65, 29, 44, 115], [93, 20, 16, 117], [96, 17, 115, 108], [97, 119, 19, 52]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
-M:=FindModelOfXG(Grec,65)`psi;
+M:=FindModelOfXG(Grec,135)`psi;
 x:=AssociativeArray();
 P:=ProjectiveSpace(Rationals(),2);
 for i in [1..3] do;
@@ -238,11 +243,13 @@ C:=Curve(P,M);
 E:=EllipticCurve(C);
 Rank(E); // 0
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+
+// ***************************************************
 //120.36.1.sm.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[24, 115, 61, 63], [27, 64, 101, 105], [55, 94, 13, 11], [61, 103, 22, 77], [67, 61, 73, 110], [73, 58, 26, 55]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
@@ -256,21 +263,20 @@ C:=Curve(P,M);
 E:=EllipticCurve(C);
 Rank(E); // 0
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 // 120.36.1.lp.1
 level := 120;
 // Elements that, together with Gamma(level), generate the group
 gens := [[27, 62, 53, 111], [40, 23, 11, 2], [41, 41, 43, 104], [53, 61, 104, 95], [70, 29, 49, 55], [101, 105, 87, 14]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
 Grec:=CreateModularCurveRec(level,gens);
 M:=FindModelOfXG(Grec,65)`psi;
 
-P<x,y,z,w>:=PolynomialRing(Integers(),4);
-Model:=[-x^2 - x*z + y^2,-16*x^2 + 12*x*y + 8*x*z - 9*y^2 + 2*y*z - z^2 + 2*w^2];
-PointsViaLifting(Model,2,3); // empty
+PointsViaLifting(M,2,3); // empty
 
-****************************************************************************************************************
+// ***************************************************
 
 
 //30.54.2.a.1
@@ -281,7 +287,7 @@ f:=x^3+1;
 g:=4*x^3;
 E:=HyperellipticCurve(g,f);
 #Chabauty0(Jacobian(SimplifiedModel(E))); // 4 points
-****************************************************************************************************************
+// ***************************************************
 
 //45.54.2.c.1
 
@@ -295,7 +301,7 @@ J:=Jacobian(SimplifiedModel(E));
 PJ1 := J! [ pts[3], pts[1] ];
 Order(PJ1); // 0 so point of infinite order
 #Chabauty(PJ1); // 4 points
-****************************************************************************************************************
+// ***************************************************
 // 120.36.3.c.1 maps to 24.6.1.c.1 which has 2 rational points
 
 // 24.6.1.c.1
@@ -303,7 +309,7 @@ P<x>:=PolynomialRing(Rationals());
 g:=x^3-8;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 // 120.36.3.a.1 maps to 24.6.1.a.1
 
@@ -315,13 +321,14 @@ P<x>:=PolynomialRing(Rationals());
 g:= x^3 + 216;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-****************************************************************************************************************
+// ***************************************************
 
 // 120.72.3.bee.1
 GL2:=GL(2,Integers(120));
-G:=sub<GL2|[[31, 30, 38, 29], [33, 100, 62, 107], [49, 0, 35, 89],[53,60,82,53],[71,20,91,17]]>;
+gens := [[31, 30, 38, 29], [33, 100, 62, 107], [49, 0, 35, 89], [53, 60, 82, 53], [71, 20, 91, 17]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
-Grec:=CreateModularCurveRec(120,Generators(G));
+Grec:=CreateModularCurveRec(120,gens);
 Model:=FindModelOfXG(Grec,67)`psi;
 
 // after computing the model we compute a genus 2 rank 2 quotient and map down to it 
@@ -400,15 +407,26 @@ end for;
 (58591911104/243 : 1)
 .......... */
 
-**********************************************************************************************************************************
+// ****************************************************************************
 
 
 //120.72.3.ka.1
 GL2:=GL(2,Integers(120));
-G:=sub<GL2|[[11, 50, 71, 7], [11, 90, 85, 59], [27, 50, 85, 83],[53,50,98,99],[61,60,80,79]]>;
+gens := [[11, 50, 71, 7], [11, 90, 85, 59], [27, 50, 85, 83], [53, 50, 98, 99], [61, 60, 80, 79]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
 
-Grec:=CreateModularCurveRec(120,Generators(G));
+Grec:=CreateModularCurveRec(120,gens);
 Model:=FindModelOfXG(Grec,67)`psi;
+
+x:=AssociativeArray();
+P2:=ProjectiveSpace(Rationals(),5);
+for i in [1..6] do;
+    x[i]:=P2.i;
+end for;
+C:=Curve(P2,Model);
+bool,C1:=IsHyperelliptic(C);
+C2:=SimplifiedModel(C1);
+
 S:=Automorphisms(C2);
 phi:=S[6];
 G := AutomorphismGroup(C2,[phi]);
@@ -420,13 +438,11 @@ pts2:=Points(CG,-1);pts2; // there are 4 points of quotient
 // now we lift those points
 
 for p in pts1 do;
-
-Points(p@@prj);
+    Points(p@@prj);
 end for;
 
 for p in pts2 do;
-
-Points(p@@prj);
+    Points(p@@prj);
 end for; // 8 points 
 
 // we now compute the j-invariants corresponding to these 8 points
@@ -472,7 +488,7 @@ end for;
 ..........
 (-873722816/59049 : 1)
 ..........*/
-*******************************************************************************************************************
+// *************************************************************
 // 30.60.3.c.1 maps to 30.12.1.d.1
 
 //30.12.1.d.1
@@ -482,7 +498,7 @@ P<x>:=PolynomialRing(Rationals());
 g:= x^3 - 327*x + 3454;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 6 points
-*******************************************************************************************************************
+// *************************************************************
 // 60.60.3.h.1 maps to 60.12.1.j.1
 //60.12.1.j.1
 
@@ -491,4 +507,4 @@ P<x>:=PolynomialRing(Rationals());
 g:= x^3 - 327*x - 3454;
 E:=EllipticCurve(g);
 #TorsionSubgroup(E); // 2 points
-*******************************************************************************************************************
+// *************************************************************
