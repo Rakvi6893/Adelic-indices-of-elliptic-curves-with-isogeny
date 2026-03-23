@@ -123,7 +123,7 @@ end for;
 // j-invariants are 1728 and 16581375 both are CM
 
 //24.36.1.fx.1
-
+P<x>:=PolynomialRing(Rationals());
 f:= x^3 -8;
 E:=EllipticCurve(f);
 Rank(E); //0
