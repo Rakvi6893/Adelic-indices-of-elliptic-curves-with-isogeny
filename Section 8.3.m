@@ -77,14 +77,18 @@ Rank(E); //0
 TorsionSubgroup(E);//6
 
 //72.24.1.a.1
-x:=AssociativeArray();
+N:=72;
+GL2:=GL(2,Integers(N));
+gens := [[1, 3, 0, 7], [6, 35, 41, 36], [13, 35, 36, 53], [34, 29, 21, 29]];
+gens :=[ Eltseq(Transpose(Matrix(2,2,g))) : g in gens];
+X:=CreateModularCurveRec(N,gens);
+C:=FindModelOfXG(X,65)`psi;
+C;
 P:=ProjectiveSpace(Rationals(),2);
 for i in [1..3] do;
 x[i]:=P.i;
 end for;
-C:=Curve(P,[
--x[1]^2*x[3] + 6*x[2]^3 + 6*x[3]^3
-]); // Model computed from Zywina's OpenImage Github
+C:=Curve(P, C);
 Pts:=PointSearch(C,1000);
 E:=EllipticCurve(C,Pts[1]);
 Rank(E);//0
