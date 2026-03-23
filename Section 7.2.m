@@ -1,4 +1,5 @@
-load "OpenImage-master/main/FindOpenImage.m"; // Please modify it according to the local directory.
+ChangeDirectory("/Users/Jacob/OpenImage-master"); // Modify the path as needed
+load "main/FindOpenImage.m";
 
 //15.36.1.b.1
 
@@ -53,56 +54,6 @@ E:=EllipticCurve(g);
 ****************************************************************************************************************
 
 //60.36.1.do.1
-
-function PointsViaLifting(psi,p,m)
-    /* Input:
-            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
-            p  : a prime
-            m  : an integer at least one    
-        Output:
-            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
-    */    
-    r:=Rank(Parent(psi[1]));
-    PolZ<[x]>:=PolynomialRing(Integers(),r);
-    psi:=[PolZ!f: f in psi];
-
-    PP:=ProjectiveSpace(GF(p),r-1);
-    C:=Scheme(PP,psi);
-    S:={Eltseq(P): P in Points(C)};   // points mod p
-    S:={[Integers()!a: a in P]: P in S};
-
-    e:=1;
-    while e lt m do
-        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
-        Snew:={};        
-        for P in S do
-            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
-            A:=[]; b:=[];
-            Pol<[a]>:=PolynomialRing(Integers(),r);
-            for f in psi do
-                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
-                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
-                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
-            end for;
-            A:=ChangeRing(Matrix(A),GF(p));
-            b:=ChangeRing(Vector(b),GF(p));
-            flag,v,W:=IsConsistent(Transpose(A),b);
-            if flag then 
-                T:={Eltseq(v+w): w in W};
-                T:={[Integers()!a: a in w] : w in T};
-                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
-                T:={PP!w: w in T}; 
-                Snew:=Snew join T;
-            end if;
-        end for;
-        S:={Eltseq(P): P in Snew};
-        S:={[Integers()!a: a in P]: P in S};
-        e:=e+1;
-    end while;
-
-    S:={[Integers(p^m)!a: a in P] : P in S};
-    return S;
-end function;
 
 P<x,y,z,w>:=PolynomialRing(Integers(),4);
 Model:=[x^2 - y*w, x^2 - 10*x*y - 2*x*w - 25*y^2 + 3*z^2 - w^2];
