@@ -1,54 +1,5 @@
-
-P<x>:=PolynomialRing(Rationals());
-function PointsViaLifting(psi,p,m)
-    /* Input:
-            psi: a sequence of homogeneous polynomials in Z[x_1,...,x_r]
-            p  : a prime
-            m  : an integer at least one    
-        Output:
-            The set of points C(Z/p^m), where C is the subscheme of P^(r-1)_Q defined by psi.
-    */    
-    r:=Rank(Parent(psi[1]));
-    PolZ<[x]>:=PolynomialRing(Integers(),r);
-    psi:=[PolZ!f: f in psi];
-
-    PP:=ProjectiveSpace(GF(p),r-1);
-    C:=Scheme(PP,psi);
-    S:={Eltseq(P): P in Points(C)};   // points mod p
-    S:={[Integers()!a: a in P]: P in S};
-
-    e:=1;
-    while e lt m do
-        PP:=ProjectiveSpace(Integers(p^(e+1)),r-1);
-        Snew:={};        
-        for P in S do
-            // For each point in C(Z/p^e), we find all possible lifts to C(Z/p^(e+1)).
-            A:=[]; b:=[];
-            Pol<[a]>:=PolynomialRing(Integers(),r);
-            for f in psi do
-                pol:=Evaluate(f,[P[i]+p^e*a[i]: i in [1..r]]);
-                A:=A cat [[MonomialCoefficient(pol,a[i]) div p^e : i in [1..r]]];
-                b:=b cat [ -MonomialCoefficient(pol,1) div p^e ];
-            end for;
-            A:=ChangeRing(Matrix(A),GF(p));
-            b:=ChangeRing(Vector(b),GF(p));
-            flag,v,W:=IsConsistent(Transpose(A),b);
-            if flag then 
-                T:={Eltseq(v+w): w in W};
-                T:={[Integers()!a: a in w] : w in T};
-                T:={ [P[i]+p^e*w[i]: i in [1..r]] : w in T};
-                T:={PP!w: w in T}; 
-                Snew:=Snew join T;
-            end if;
-        end for;
-        S:={Eltseq(P): P in Snew};
-        S:={[Integers()!a: a in P]: P in S};
-        e:=e+1;
-    end while;
-
-    S:={[Integers(p^m)!a: a in P] : P in S};
-    return S;
-end function;
+load "OpenImage-master/main/GL2GroupTheory.m"; // Modify the path as needed
+load "OpenImage-master/main/ModularCurves.m"; // Modify the path as needed
 
 // 8.2.1: Maximal products with finitely many points
 // Out of the 34, 16 are elliptic curves of rank 0 with only cuspidal or CM rational points:
