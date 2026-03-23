@@ -1,21 +1,24 @@
+ChangeDirectory("/Users/Jacob/OpenImage-master"); // Modify the path as needed
+load "main/FindOpenImage.m";
 
 // 13.91.3.a.1
 
-load "OpenImage-master/main/FindOpenImage.m";  // please change the path according to local directory on your system
-
 j:=2^(18)*3^3*13^4*127^3*139^3*157^3*283^3*929/(5^(13)*61^(13));
 E:=EllipticCurveFromjInvariant(j);
- G:=FindOpenImage(E); 
- Factorization(864370); //adelic level
+G:=FindOpenImage(E);
+N := #BaseRing(G); N;
+// 864370
+G := sub<GL(2, Integers(N)) | [Transpose(g) : g in Generators(G)]>; // Take the transpose
+Factorization(N); //adelic level
 //[ <2, 1>, <5, 1>, <13, 1>, <61, 1>, <109, 1> ]
-pi:=hom<GL(2,Integers(864370))->GL(2,Integers(2))|[GL(2,Integers(2))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
-Order(GL(2,Integers(2)))/Order(pi(G)); // 1
-
-pi:=hom<GL(2,Integers(864370))->GL(2,Integers(5))|[GL(2,Integers(5))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
-Order(GL(2,Integers(5)))/Order(pi(G)); // 1
-
-pi:=hom<GL(2,Integers(864370))->GL(2,Integers(61))|[GL(2,Integers(61))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
-Order(GL(2,Integers(61)))/Order(pi(G)); // 1
-
-pi:=hom<GL(2,Integers(864370))->GL(2,Integers(109))|[GL(2,Integers(109))!GL(2,Integers(864370)).i:i in [1..#Generators(GL(2,Integers(864370)))]]>;
-Order(GL(2,Integers(109)))/Order(pi(G)); // 1
+for p in PrimeDivisors(N) do
+	n := p^Valuation(N, p);
+	n, sub<GL(2, Integers(n)) | Generators(G)> eq GL(2, Integers(n));
+end for;
+/*
+2 true
+5 true
+13 false
+61 true
+109 true
+*/
