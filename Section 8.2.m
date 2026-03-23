@@ -531,7 +531,8 @@ Chabauty0(Jacobian(C));//4 points
 
 //The curve 48.144.7.mh.1 covers 24.72.2.gm.1, which we consider here
 f := 2*x^6 - 54;
-//code of Bianchi--Padurariu: https://github.com/oana-adascalitei/MWSieveForDatabase/blob/main/sieve_with_no_known_points.m
+//the functions MakeLookup1, MakeDLp1, and SimpleSieve Bielliptic are code of Bianchi--Padurariu
+// their repo can be found here: https://github.com/oana-adascalitei/MWSieveForDatabase/blob/main/sieve_with_no_known_points.m
 function MakeLookup1(G, m) //from [S09] 
   return pmap<Codomain(m) -> G| [<m(g), g> : g in G]>;
 end function;
