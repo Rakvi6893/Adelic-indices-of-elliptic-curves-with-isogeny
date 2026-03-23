@@ -1,5 +1,6 @@
 load "OpenImage-master/main/GL2GroupTheory.m"; // Modify the path as needed
 load "OpenImage-master/main/ModularCurves.m"; // Modify the path as needed
+P<x>:=PolynomialRing(Rationals());
 
 // 8.2.1: Maximal products with finitely many points
 // Out of the 34, 16 are elliptic curves of rank 0 with only cuspidal or CM rational points:
