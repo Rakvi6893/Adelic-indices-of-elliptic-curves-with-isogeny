@@ -72,7 +72,7 @@ function ConstructLattice(H0, K, L2, L3 : IncludeRoot := true)
     S := {};
     
     if IncludeRoot then
-        X := CreateModularCurveRec(K);
+        X := CreateModularCurveRec(#BaseRing(K), [ Eltseq(Transpose(g)) : g in Generators(K)]);
         Include(~S, <GL(2,Integers(6)), X`genus, GenusOneRank(X)> );
     end if;
     
@@ -94,7 +94,7 @@ function ConstructLattice(H0, K, L2, L3 : IncludeRoot := true)
         
             Lvl := LCM(LevelOfH, LevelOfK);
             G := GL2Lift(H, Lvl) meet GL2Lift(K, Lvl);
-            X := CreateModularCurveRec(G);
+            X := CreateModularCurveRec(#BaseRing(G), [ Eltseq(Transpose(g)) : g in Generators(G)]);
 
             // We try to figure out the rank in the genus 1 case. 
             Rk := GenusOneRank(X);
