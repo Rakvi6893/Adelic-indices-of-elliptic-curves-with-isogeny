@@ -2,7 +2,7 @@
 
 This repository has code to complete computations discussed in the paper "The Possible Adelic Indices for Elliptic Curves Admitting a Rational Cyclic Isogeny" by Kate Finnerty, Tyler Genao, Jacob Mayle, and Rakvi.
  
-To run this code, it is necessary to install David Zywina's OpenImage repository, found [here](https://github.com/davidzywina/OpenImage/tree/master). It is crucial to have an up-to-date version of MAGMA for this to run.
+To run this code, it is necessary to install David Zywina's OpenImage repository, found [here](https://github.com/davidzywina/OpenImage/tree/master). Some files also require Zywina's modular repository, found [here](https://github.com/davidzywina/Modular). It is crucial to have an up-to-date version of MAGMA for this to run.
 
 # Description of Files
 
