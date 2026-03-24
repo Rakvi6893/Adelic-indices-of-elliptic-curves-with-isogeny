@@ -30,7 +30,7 @@ To run this code, it is necessary to install David Zywina's OpenImage repository
 
 This code was built on MAGMA v2-28.27 and last updated in March 2026. If you have questions or suggestions or if you find bugs, please contact us.
 
-[Kate Finnerty](katefinnertymath.com), Boston University, ksfinn (at) bu (dot) edu
+[Kate Finnerty](https://katefinnertymath.com), Boston University, ksfinn (at) bu (dot) edu
 
 [Tyler Genao](https://tylergenao.com/), The Ohio State University, genao.5 (at) osu (dot) edu 
 
