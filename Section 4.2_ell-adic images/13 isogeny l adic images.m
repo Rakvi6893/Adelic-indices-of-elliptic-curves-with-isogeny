@@ -1,4 +1,4 @@
-// This code accompanies the proof of Proposition 28 in The Possible Adelic Indices for Elliptic Curves Admitting a Rational Cyclic Isogeny by Finnerty, Genao, Mayle, and Rakvi.
+// This code accompanies the proof of Proposition 28 in The Possible Adelic Indices for Elliptic Curves Admitting a Rational Cyclic Isogeny.
 // Remember to load Zywina's Open Image code as instructed in README.md.
 
 load "OpenImage-master/main/GL2GroupTheory.m"; // Modify the path as needed
