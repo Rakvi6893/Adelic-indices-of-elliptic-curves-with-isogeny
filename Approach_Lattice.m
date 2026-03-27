@@ -1,11 +1,11 @@
 D := GetCurrentDirectory();
-ChangeDirectory("/Users/jacob/Modular-main"); // Change this to the location of Modular-main
+ChangeDirectory("/Users/.../Modular-main"); // Change this to the location of Modular-main
 
 AttachSpec("Modular.spec");
 ChangeDirectory(D);
 load "RelevantModCrvs.m";
 load "Identifier.m";
-ChangeDirectory("/Users/Jacob/OpenImage-master/main/");
+ChangeDirectory("/Users/.../OpenImage-master/main/");
 load "GL2GroupTheory.m";
 ChangeDirectory(D);
 
